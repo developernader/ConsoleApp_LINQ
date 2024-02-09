@@ -9,7 +9,7 @@ namespace ConsoleApp_LINQ.Extentions
 {
     public static class Filter
     {
-        public static List<Customer> GetAhmeds(List<Customer> list)
+        public static List<Customer> GetAhmeds(this List<Customer> list)
         {
             List<Customer> ahmds = new List<Customer>();
             foreach (var item in list)
