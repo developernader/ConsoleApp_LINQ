@@ -1,4 +1,7 @@
-﻿List<int> numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+﻿using SeedData.Models;
+using System.Xml.Linq;
+
+List<int> numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 List<string> stringList = new List<string>()
 { "Nader", "Yasser", "Mo salah", "Rashad","ahmed ahmed","ahmed mohamady" };
 //var result = Enumerable.Where(numbers, n => n > 5);
@@ -32,6 +35,29 @@ var customers = GetData.GetCustomers()
     }
 );
 foreach (var item in customers)
+{
+    Console.WriteLine(item);
+}
+Console.WriteLine("--------------------------------------------------------------------------");
+var custs = GetData.GetCustomers()
+    .Where(x => x.Age > 35)
+    .Select(w => new CustomerDTO
+    {
+        CustomerName = w.Name,
+        CustomerPhone = w.Telephone
+    }
+    );
+foreach (var item in custs)
+{
+    Console.WriteLine(item.CustomerName);
+}
+
+Console.WriteLine("--------------------------------------------------------------------------");
+
+var query = from c in GetData.GetCustomers()
+where c.Age > 30
+        select new { Name = c.Name , CategoryId = c.CategoryId , SpendAverage= c.SpendAverage };
+foreach (var item in query)
 {
     Console.WriteLine(item);
 }
